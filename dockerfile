@@ -55,12 +55,12 @@ RUN mkdir -p /wine-dirs/wine32 && mkdir -p /wine-dirs/wine64
 
 RUN cd /wine-dirs/wine64 \
     && ../wine-source/configure \
-        CFLAGS="-march=native -O3 -pipe -fstack-protector-strong" \
+        CFLAGS="-O3 -pipe -fstack-protector-strong" \
         --enable-win64 \
     && make -j$(nproc)
 
 RUN cd /wine-dirs/wine32 \
     && PKG_CONFIG_PATH=/usr/lib/pkgconfig ../wine-source/configure \
-        CFLAGS="-march=native -O3 -pipe -fstack-protector-strong" \
+        CFLAGS="-O3 -pipe -fstack-protector-strong" \
         --with-wine64=../wine64 \
     && make -j$(nproc)
